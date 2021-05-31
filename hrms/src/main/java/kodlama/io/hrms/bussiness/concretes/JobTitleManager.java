@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.bussiness.abstracts.JobTitleService;
 import kodlama.io.hrms.dataAccess.abstracts.JobTitleDao;
-import kodlama.io.hrms.entities.concretes.job_titles;
+import kodlama.io.hrms.entities.concretes.JobTitle;
 @Service
 public class JobTitleManager implements JobTitleService {
 	@Autowired
 	private JobTitleDao jobtitleDao;
 	
 	@Override
-	public List<job_titles> getAll() {
+	public List<JobTitle> getAll() {
 			return this.jobtitleDao.findAll();
 	}
 
