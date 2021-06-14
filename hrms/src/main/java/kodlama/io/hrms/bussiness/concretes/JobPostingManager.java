@@ -11,7 +11,7 @@ import kodlama.io.hrms.bussiness.abstracts.JobPostingService;
 import kodlama.io.hrms.core.utilities.result.DataResult;
 import kodlama.io.hrms.core.utilities.result.Result;
 import kodlama.io.hrms.core.utilities.result.SuccessDataResult;
-import kodlama.io.hrms.core.utilities.result.SuccessResult;
+import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.dataAccess.abstracts.JobPostingDao;
 import kodlama.io.hrms.entities.concretes.JobPosting;
 @Service
@@ -23,7 +23,7 @@ public class JobPostingManager implements JobPostingService {
 	@Override
 	public Result add(JobPosting jobPosting) {
 		this.jobPostingDao.save(jobPosting);
-		return new SuccessResult("Başarılı");
+		return new SuccesResult("Başarılı");
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class JobPostingManager implements JobPostingService {
 	@Override
 	public Result Update(JobPosting jobPosting) {
 		this.jobPostingDao.save(jobPosting);
-		return new SuccessResult();
+		return new SuccesResult();
 	}
 
 	

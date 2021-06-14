@@ -1,5 +1,5 @@
 package kodlama.io.hrms.entities.concretes;
-
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,27 +20,28 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "job_titles")
+@Table(name = "schools")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobPostings" })
-public class JobTitle {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler",  })
+public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "title")
-	private String title;
+	@Column(name = "school_name")
+	private String schoolName;
 
-	@Column(name = "job_description")
-	private String jobDescription;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<JobPosting> jobPostings;
+	@Column(name = "section")
+	private String section;
+	@Column(name = "year_of_entry")
+	private LocalDate yearOfEntry;
 	
+	@Column(name = "year_of_graduation")
+	private LocalDate yearOfGraduation;
 	
-	
-
-
+	@ManyToOne()
+	@JoinColumn(name = "cv_id")
+	private Cv cv;
 }

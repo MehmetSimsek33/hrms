@@ -18,7 +18,7 @@ import kodlama.io.hrms.entities.dto.CandidateForRegisterDto;
 
 @RestController
 @RequestMapping("/api/candidates")
-public class CandidatesController 
+public class CandidateController 
 {	
 		@Autowired
 		private CandidateService candidateService;

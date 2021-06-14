@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlama.io.hrms.bussiness.abstracts.JobPostingService;
 import kodlama.io.hrms.core.utilities.result.DataResult;
 import kodlama.io.hrms.core.utilities.result.Result;
-import kodlama.io.hrms.core.utilities.result.SuccessResult;
+import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.entities.concretes.JobPosting;
 
 @RestController
@@ -25,7 +25,7 @@ public class JobPostingController {
 
 	public Result add(@RequestBody JobPosting jobPosting) {
 		this.jobPostingService.add(jobPosting);
-		return new SuccessResult("başarışı");
+		return new SuccesResult("başarışı");
 	}
 
 	@GetMapping("/getall")
@@ -51,7 +51,7 @@ public class JobPostingController {
 	@PostMapping("/update")
 	public Result updateStatus(@RequestBody JobPosting jobPosting) {
 		this.jobPostingService.Update(jobPosting);
-		return new SuccessResult("başarılı");
+		return new SuccesResult("başarılı");
 	}
 
 }

@@ -13,7 +13,7 @@ import kodlama.io.hrms.core.utilities.result.DataResult;
 import kodlama.io.hrms.core.utilities.result.ErrorResult;
 import kodlama.io.hrms.core.utilities.result.Result;
 import kodlama.io.hrms.core.utilities.result.SuccessDataResult;
-import kodlama.io.hrms.core.utilities.result.SuccessResult;
+import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.dataAccess.abstracts.EmployerDao;
 import kodlama.io.hrms.entities.concretes.Employer;
 import kodlama.io.hrms.entities.dto.EmployerForRegisterDto;
@@ -43,13 +43,13 @@ public class EmployerManager implements EmployerService {
 				this.employerDao.save(employer);
 				if (verificationLink()) {
 					this.employerDao.save(employer);
-					return new SuccessResult("Kullanıcı başarıyla eklendi");
+					return new SuccesResult("Kullanıcı başarıyla eklendi");
 				}
 
 				else if (this.employeService.confirm(employer) != null) {
 
 					this.employerDao.save(employer);
-					return new SuccessResult("Kullanıcı başarıyla eklendi");
+					return new SuccesResult("Kullanıcı başarıyla eklendi");
 
 				} else {
 					return new ErrorResult("Kullanıcı doğrulama linkine tıklamadığı için kaydı geçersiz sayıldı.");

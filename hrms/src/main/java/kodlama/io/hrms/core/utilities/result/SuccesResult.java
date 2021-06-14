@@ -1,16 +1,16 @@
 package kodlama.io.hrms.core.utilities.result;
 
-public class SuccessResult extends Result {
+public class SuccesResult extends Result {
 
 	
 	
-	public SuccessResult() 
+	public SuccesResult() 
 	{
 		super(true);
 	}
 
 
-	public SuccessResult(String message) 
+	public SuccesResult(String message) 
 	{
 		super(true,message);
 		

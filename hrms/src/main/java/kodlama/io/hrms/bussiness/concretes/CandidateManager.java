@@ -13,7 +13,6 @@ import kodlama.io.hrms.core.utilities.result.DataResult;
 import kodlama.io.hrms.core.utilities.result.ErrorResult;
 import kodlama.io.hrms.core.utilities.result.Result;
 import kodlama.io.hrms.core.utilities.result.SuccessDataResult;
-import kodlama.io.hrms.core.utilities.result.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.CandidateDao;
 import kodlama.io.hrms.entities.concretes.Candidate;
 import kodlama.io.hrms.entities.dto.CandidateForRegisterDto;
@@ -32,10 +31,10 @@ public class CandidateManager implements CandidateService {
 	public Result add(CandidateForRegisterDto candidateForRegisterDto) {
 		var candidate = new Candidate();
 		candidate.setId(candidateForRegisterDto.getId());
-		candidate.setFirst_name(candidateForRegisterDto.getFirstName());
-		candidate.setLast_name(candidateForRegisterDto.getLastName());
-		candidate.setBirth_date(LocalDate.parse(candidateForRegisterDto.getBirthDate()));
-		candidate.setIdentification_number(candidateForRegisterDto.getIdentificationNumber());
+		candidate.setFirstName(candidateForRegisterDto.getFirstName());
+		candidate.setLastName(candidateForRegisterDto.getLastName());
+		candidate.setBirthDate(LocalDate.parse(candidateForRegisterDto.getBirthDate()));
+		candidate.setIdentificationNumber(candidateForRegisterDto.getIdentificationNumber());
 		candidate.setEmailAdress(candidateForRegisterDto.getEmailAdress());
 		candidate.setPassword(candidateForRegisterDto.getPassword());
 		if (mandatoryField(candidate)) {
@@ -51,7 +50,12 @@ public class CandidateManager implements CandidateService {
 						}
 
 					}
-				} else {
+					else {
+
+						return new ErrorResult("Mernis Dogrulanamadi.");
+						}
+				} 
+				else {
 
 					return new ErrorResult("Yazdığınız şifreler birbiriyle uyuşmuyor lütfen kontrol ediniz.");
 				}
@@ -83,8 +87,8 @@ public class CandidateManager implements CandidateService {
 	}
 
 	private boolean mandatoryField(Candidate candidate) {
-		if (candidate.getBirth_date() != null && candidate.getEmailAdress() != "" && candidate.getFirst_name() != ""
-				&& candidate.getLast_name() != "" && candidate.getPassword() != "") {
+		if (candidate.getBirthDate() != null && candidate.getEmailAdress() != "" && candidate.getFirstName() != ""
+				&& candidate.getLastName() != "" && candidate.getPassword() != "") {
 			return true;
 		} else {
 
@@ -94,7 +98,7 @@ public class CandidateManager implements CandidateService {
 
 	private boolean identificationNumberAndEmail(Candidate candidate) {
 		for (Candidate emailcheck : this.candidateDao.findAll()) {
-			if (emailcheck.getIdentification_number().equals(candidate.getIdentification_number())
+			if (emailcheck.getIdentificationNumber().equals(candidate.getIdentificationNumber())
 					|| emailcheck.getEmailAdress().equals(candidate.getEmailAdress())) {
 
 				return false;

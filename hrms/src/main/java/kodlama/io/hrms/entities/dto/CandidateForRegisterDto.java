@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CandidateForRegisterDto extends User {
-
 	private String repeatPassword;
 
 	@Column(name = "first_name")
@@ -29,5 +28,4 @@ public class CandidateForRegisterDto extends User {
 
 	@Column(name = "birth_date")
 	private String birthDate;
-
 }

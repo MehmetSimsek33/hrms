@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.bussiness.abstracts.EmployeService;
 import kodlama.io.hrms.core.utilities.result.Result;
-import kodlama.io.hrms.core.utilities.result.SuccessResult;
+import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.dataAccess.abstracts.EmployeDao;
 import kodlama.io.hrms.entities.concretes.Employe;
 import kodlama.io.hrms.entities.concretes.Employer;
@@ -20,13 +20,13 @@ public class EmployeManager implements EmployeService {
 	@Override
 	public Result confirm(Employer employer) {
 
-		return new SuccessResult("Sistem çalışanı tarafından" + employer.getCompanyName() + " adlı firma doğrulandı.");
+		return new SuccesResult("Sistem çalışanı tarafından" + employer.getCompanyName() + " adlı firma doğrulandı.");
 	}
 
 	@Override
 	public Result add(Employe employe) {
 		this.employeDao.save(employe);
-		return new SuccessResult("Kullanıcı başarıyla eklendi");
+		return new SuccesResult("Kullanıcı başarıyla eklendi");
 
 	}
 

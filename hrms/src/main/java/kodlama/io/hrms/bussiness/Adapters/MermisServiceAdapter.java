@@ -20,10 +20,10 @@ public class MermisServiceAdapter implements CandidateCheckServices {
 	            KPSPublicSoap client = new KPSPublicSoapProxy();
 
 	            boolean isValid = client.TCKimlikNoDogrula(
-	            		Long.valueOf(candidates.getIdentification_number()),
-	            		candidates.getFirst_name().toUpperCase(new Locale("tr")),
-	            		candidates.getLast_name().toUpperCase(new Locale("tr"))
-	            		,candidates.getBirth_date().getYear());
+	            		Long.valueOf(candidates.getIdentificationNumber()),
+	            		candidates.getFirstName().toUpperCase(new Locale("tr")),
+	            		candidates.getLastName().toUpperCase(new Locale("tr"))
+	            		,candidates.getBirthDate().getYear());
 	            System.out.println(isValid);
 	            return isValid;
 	            
