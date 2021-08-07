@@ -13,6 +13,6 @@ import kodlama.io.hrms.entities.dto.CvDto;
 
 public interface CvDao extends JpaRepository<Cv, Integer> {
 	
+	Cv getCvsById(int id);
 
-	
 }

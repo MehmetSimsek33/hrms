@@ -14,6 +14,11 @@ import kodlama.io.hrms.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.dataAccess.abstracts.JobPostingDao;
 import kodlama.io.hrms.entities.concretes.JobPosting;
+import kodlama.io.hrms.entities.dto.JobAdFilter;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 @Service
 public class JobPostingManager implements JobPostingService {
 
@@ -52,6 +57,19 @@ public class JobPostingManager implements JobPostingService {
 	public Result Update(JobPosting jobPosting) {
 		this.jobPostingDao.save(jobPosting);
 		return new SuccesResult();
+	}
+
+	@Override
+	public Result updateStatus(int status, int id) {
+		this.jobPostingDao.updateStatus(status, id);
+		return new SuccesResult();
+	}
+
+	@Override
+	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobAdFilter jobPostingFilter) {
+		  Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+		  return new SuccessDataResult<List<JobPosting>>
+		  (this.jobPostingDao.getByFilter(jobPostingFilter, pageable).getContent(), this.jobPostingDao.getByFilter(jobPostingFilter,pageable).getTotalElements()+"");
 	}
 
 	

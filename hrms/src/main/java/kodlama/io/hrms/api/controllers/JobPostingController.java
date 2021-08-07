@@ -1,12 +1,14 @@
-package kodlama.io.hrms.api.controllers;
+	package kodlama.io.hrms.api.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.hrms.bussiness.abstracts.JobPostingService;
@@ -14,7 +16,8 @@ import kodlama.io.hrms.core.utilities.result.DataResult;
 import kodlama.io.hrms.core.utilities.result.Result;
 import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.entities.concretes.JobPosting;
-
+import kodlama.io.hrms.entities.dto.JobAdFilter;
+@CrossOrigin
 @RestController
 @RequestMapping("/api/jobpostings")
 public class JobPostingController {
@@ -22,10 +25,8 @@ public class JobPostingController {
 	JobPostingService jobPostingService;
 
 	@PostMapping("/add")
-
 	public Result add(@RequestBody JobPosting jobPosting) {
-		this.jobPostingService.add(jobPosting);
-		return new SuccesResult("başarışı");
+		return this.jobPostingService.add(jobPosting);
 	}
 
 	@GetMapping("/getall")
@@ -53,5 +54,16 @@ public class JobPostingController {
 		this.jobPostingService.Update(jobPosting);
 		return new SuccesResult("başarılı");
 	}
+	@PostMapping("/statusUpdate")
+	public Result updateStatus(@RequestParam("status") int status, @RequestParam("id") int id) {
+		return this.jobPostingService.updateStatus(status, id);
 
+	}
+	@PostMapping("/getByFilter")
+	public Result getByFilter(@RequestParam int pageNo, @RequestParam int pageSize,
+			@RequestBody JobAdFilter jobPostingFilter) {
+		
+		return jobPostingService.getByFilter(pageNo, pageSize, jobPostingFilter);
+		
+	}
 }

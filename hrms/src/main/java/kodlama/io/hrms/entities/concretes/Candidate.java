@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "candidates")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "cvs" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "cvs","favoriteJobPostings" })
 public class Candidate extends User {
 	
 	
@@ -48,7 +48,8 @@ public class Candidate extends User {
 	@OneToOne(mappedBy = "candidate", optional = true, fetch = FetchType.LAZY)
 	private Cv cv;
 	
-
+	@OneToMany(mappedBy = "candidate")
+	private List<FavoriteJobPosting> favoriteJobPostings;
 
 
 }

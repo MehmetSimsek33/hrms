@@ -13,6 +13,10 @@ import kodlama.io.hrms.entities.dto.CvLanguageDetailDto;
 
 public interface LanguageService {
 	DataResult<List<CvLanguageDetailDto>> getAllCvLanguageDetailDto();
+	//Result addLanguageDto(CvLanguageDetailDto cvLanguageDetailDto);
 	Result add(Language language); 
+	public Result deleteLanguage(int languageId);
+	DataResult<List<Language>> getall();
+	public DataResult<List<Language>> getByCvId(int cvId);
 	
 }

@@ -15,7 +15,9 @@ import kodlama.io.hrms.core.utilities.result.Result;
 import kodlama.io.hrms.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.result.SuccesResult;
 import kodlama.io.hrms.dataAccess.abstracts.EmployerDao;
+import kodlama.io.hrms.dataAccess.abstracts.TempEmployerDao;
 import kodlama.io.hrms.entities.concretes.Employer;
+import kodlama.io.hrms.entities.concretes.TempEmployer;
 import kodlama.io.hrms.entities.dto.EmployerForRegisterDto;
 import lombok.var;
 
@@ -28,6 +30,9 @@ public class EmployerManager implements EmployerService {
 	VerificationEmailService verificationEmailService;
 	@Autowired
 	EmployeService employeService;
+	@Autowired
+	TempEmployerDao tempEmployerDao;
+	
 	@Override
 	public Result add(EmployerForRegisterDto employerForRegisterDto) {
 		var employer = new Employer();
@@ -80,5 +85,65 @@ public class EmployerManager implements EmployerService {
 			return false;
 		}
 	}
+
+	@Override
+	public Result Update(Employer employer) {
+		this.employerDao.save(employer);
+		return new SuccesResult("Employer güncellendi");
+	
+	}
+
+	@Override
+	public Result updateTemp(TempEmployer tempEmployer) {
+		tempEmployer.setId(0);
+		 Employer employer=this.employerDao.getById(tempEmployer.getEmpId());
+		 this.tempEmployerDao.save(tempEmployer);
+		 employer.setStatusUpdate(true);
+		 this.employerDao.save(employer);
+		 return new SuccesResult("Güncelleme isteği gönderildi");
+	}
+
+	@Override
+	public DataResult<Employer> getById(int id) {
+		  return new SuccessDataResult<Employer>(this.employerDao.getById(id),"Data listelendi");
+	}
+
+	@Override
+	public Result verifyUpdate(int empId) {
+		 if(!this.tempEmployerDao.existsById(empId)){
+	            return new ErrorResult("Böyle bir güncelleme talebi yok");
+	        }
+		TempEmployer tempEmployer=this.tempEmployerDao.findById(empId);
+		Employer employer=this.employerDao.getById(tempEmployer.getEmpId());
+		 tempEmployer.setVerifyed(true);
+		 this.tempEmployerDao.save(tempEmployer);
+		 
+		 employer.setEmailAdress(tempEmployer.getEmail());
+		 employer.setCompanyName(tempEmployer.getCompanyName());
+		 employer.setPhone(tempEmployer.getPhone());
+		 employer.setWebAddress(tempEmployer.getWebAddress());
+		 employer.setStatusUpdate(false);
+		 this.employerDao.save(employer);
+		 deleteTempEmploye(empId);
+		  return new SuccesResult("Bilgiler güncellendi");
+	}
+
+	@Override
+	public DataResult<List<TempEmployer>> getAllTempEmployer() {
+		return new SuccessDataResult<List<TempEmployer>>(this.tempEmployerDao.findAll());
+	}
+
+	@Override
+	public Result deleteTempEmploye(int tempEmployeId) {
+		TempEmployer tempEmployer=this.tempEmployerDao.findById(tempEmployeId);
+		Employer employer=this.employerDao.getById(tempEmployer.getEmpId());
+		this.tempEmployerDao.deleteById(tempEmployeId);
+		 employer.setStatusUpdate(false);
+		 this.employerDao.save(employer);
+		return new SuccesResult("basarili");
+	}
+
+
+
 	}
 

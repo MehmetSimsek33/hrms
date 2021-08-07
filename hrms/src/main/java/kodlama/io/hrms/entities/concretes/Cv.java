@@ -30,7 +30,7 @@ import com.sun.istack.Nullable;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "schools", "languages",
-	"images","job_experiences","candidates" })
+	"images","job_experiences","candidates","skills" })
 public class Cv {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,9 +47,10 @@ public class Cv {
 	private String coverLetter;
 
 	 @Column(name = "skill")
-   private String skill;
+	 	private String skill;
 
-	
+	@OneToMany(mappedBy = "cv")
+	private List<Skill> skills;
 	@OneToMany(mappedBy = "cv")
 	private List<Language> languages;
 
@@ -63,7 +64,7 @@ public class Cv {
      @JsonIgnore
 	  private Image image;
 
-	 @OneToOne(optional = false, fetch = FetchType.LAZY)
+	 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 		@JoinColumn(name = "candidate_id")
 		private Candidate candidate;
 	

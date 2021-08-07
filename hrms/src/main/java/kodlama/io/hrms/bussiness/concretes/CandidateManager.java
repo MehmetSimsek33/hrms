@@ -37,7 +37,6 @@ public class CandidateManager implements CandidateService {
 		candidate.setIdentificationNumber(candidateForRegisterDto.getIdentificationNumber());
 		candidate.setEmailAdress(candidateForRegisterDto.getEmailAdress());
 		candidate.setPassword(candidateForRegisterDto.getPassword());
-		if (mandatoryField(candidate)) {
 			if (identificationNumberAndEmail(candidate)) {
 				if (candidate.getPassword().equals(candidateForRegisterDto.getRepeatPassword()))  {
 					if (this.candidateCheckService.checkIfRealPerson(candidate)) {
@@ -63,9 +62,7 @@ public class CandidateManager implements CandidateService {
 			} else {
 				return new ErrorResult("Email veya TC Kimlik numaranız sistemde zaten kayıtlı !");
 			}
-		} else {
-			return new ErrorResult("Hiç bir alan boş geçilemez !");
-		}
+		
 		return null;
 
 	}

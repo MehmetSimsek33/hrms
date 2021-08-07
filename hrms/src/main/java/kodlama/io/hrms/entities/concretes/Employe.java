@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,10 +27,10 @@ public class Employe extends User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
+	@NotNull
 	@Column(name = "first_name")
-	private String firsName;
-
+	private String firstName;
+	@NotNull
 	@Column(name = "last_name")
 	private String lastName;
 

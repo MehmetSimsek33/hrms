@@ -33,7 +33,10 @@ public class Employer extends User {
 
 	@Column(name = "phone")
 	private String phone;
-
+	
+	@Column(name = "status_update")
+	private boolean statusUpdate;
+	
 	@OneToMany(mappedBy = "employer")
 	private List<JobPosting> jobPostings;
 

@@ -37,8 +37,25 @@ public class LanguageManager implements LanguageService{
 		return new SuccesResult("basarili");
 	}
 
+	@Override
+	public DataResult<List<Language>> getall() {
+		return new SuccessDataResult<List<Language>>(this.languageDao.findAll());
+	}
 
 	
+
+	 @Override
+	    public DataResult<List<Language>> getByCvId(int cvId) {
+	      
+	        return new SuccessDataResult<List<Language>>(this.languageDao.findByCvId(cvId),"Listelendi");
+	    }
+	@Override
+	public Result deleteLanguage(int languageId) {
+		this.languageDao.deleteById(languageId);
+		return new SuccesResult("basarili");
+	}
+	
+
 	
 
 }

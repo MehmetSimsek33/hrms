@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Data
@@ -18,8 +22,13 @@ public class User {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name="id")
 	    private int id;
+	
+		@NotBlank
+		@NotNull
 	    @Column(name="email_address")
 	    private String emailAdress;
+		@NotBlank
+		@NotNull
 	    @Column(name="password")
 	    private String password;
 	    

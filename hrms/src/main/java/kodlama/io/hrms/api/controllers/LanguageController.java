@@ -6,10 +6,13 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.hrms.bussiness.abstracts.LanguageService;
@@ -19,10 +22,12 @@ import kodlama.io.hrms.entities.concretes.Language;
 import kodlama.io.hrms.entities.dto.CvLanguageDetailDto;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/languges")
 public class LanguageController {
 
 	private LanguageService languageservice;
+	
 	
 	public LanguageController(LanguageService languageservice) {
 		super();
@@ -35,10 +40,22 @@ public class LanguageController {
 		return new ResponseEntity<>(this.languageservice.getAllCvLanguageDetailDto(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/add")
 	public Result save(@RequestBody Language language){
 		return this.languageservice.add(language);
-		
-	
+
 	}
+	@GetMapping("/getAll")
+	public DataResult<List<Language>> getall()
+	{
+		return this.languageservice.getall();	
+	}
+	  @GetMapping("/getByCvId")
+	    public DataResult<List<Language>> getByCvId(@RequestParam int cvId){
+	        return this.languageservice.getByCvId(cvId);
+	    }
+	  @DeleteMapping("/deleteLanguage")
+	  public Result deleteLanguage(@RequestParam int languageId){
+	        return this.languageservice.deleteLanguage(languageId);
+	    }
 }
